@@ -1,6 +1,6 @@
-import { v4 as uuidv4 } from 'uuid';
-import { ChatInterface, ConfigInterface, ModelOptions } from '@type/chat';
 import useStore from '@store/store';
+import { ChatInterface, ConfigInterface, ModelOptions } from '@type/chat';
+import { v4 as uuidv4 } from 'uuid';
 
 const date = new Date();
 const dateString =
@@ -18,19 +18,19 @@ Carefully heed the user's instructions.
 Respond using Markdown.`;
 
 export const modelOptions: ModelOptions[] = [
-  'gpt-3.5-turbo',
-  'gpt-3.5-turbo-16k',
+  'gpt-35-16k',
   'gpt-4',
-  'gpt-4-32k',
+  'gpt4-32k',
   // 'gpt-3.5-turbo-0301',
   // 'gpt-4-0314',
   // 'gpt-4-32k-0314',
 ];
 
-export const defaultModel = 'gpt-3.5-turbo';
+export const defaultModel = 'gpt-4';
 
 export const modelMaxToken = {
   'gpt-3.5-turbo': 4096,
+  'gpt-35-16k': 4096,
   'gpt-3.5-turbo-0301': 4096,
   'gpt-3.5-turbo-0613': 4096,
   'gpt-3.5-turbo-16k': 16384,
@@ -39,6 +39,7 @@ export const modelMaxToken = {
   'gpt-4-0314': 8192,
   'gpt-4-0613': 8192,
   'gpt-4-32k': 32768,
+  'gpt4-32k': 32768,
   'gpt-4-32k-0314': 32768,
   'gpt-4-32k-0613': 32768,
 };
