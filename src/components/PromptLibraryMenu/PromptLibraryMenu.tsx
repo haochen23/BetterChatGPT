@@ -1,14 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
 import useStore from '@store/store';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import PopupModal from '@components/PopupModal';
-import { Prompt } from '@type/prompt';
-import PlusIcon from '@icon/PlusIcon';
+import useAddChat from '@hooks/useAddChat';
 import CrossIcon from '@icon/CrossIcon';
+import PlusIcon from '@icon/PlusIcon';
+import { Prompt } from '@type/prompt';
 import { v4 as uuidv4 } from 'uuid';
-import ImportPrompt from './ImportPrompt';
 import ExportPrompt from './ExportPrompt';
+import ImportPrompt from './ImportPrompt';
 
 const PromptLibraryMenu = () => {
   const { t } = useTranslation();
@@ -35,6 +36,18 @@ const PromptLibraryMenuPopUp = ({
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const { t } = useTranslation();
+
+  const addChat = useAddChat();
+
+  const setDefaultSystemMessage = useStore(
+    (state) => state.setDefaultSystemMessage
+  );
+
+  const onButtonClick = (prompt: Prompt) => {
+    setDefaultSystemMessage(prompt.prompt);
+    setIsModalOpen(false);
+    addChat();
+  };
 
   const setPrompts = useStore((state) => state.setPrompts);
   const prompts = useStore((state) => state.prompts);
@@ -105,6 +118,7 @@ const PromptLibraryMenuPopUp = ({
           <div className='flex font-bold border-b border-gray-500/50 mb-1 p-1'>
             <div className='sm:w-1/4 max-sm:flex-1'>{t('name')}</div>
             <div className='flex-1'>{t('prompt')}</div>
+            <div className='flex-1'>{t('action')}</div>
           </div>
           {_prompts.map((prompt, index) => (
             <div
@@ -144,6 +158,14 @@ const PromptLibraryMenuPopUp = ({
                   value={prompt.prompt}
                   rows={1}
                 ></textarea>
+              </div>
+              <div className='flex-1'>
+                <button
+                  className='btn btn-small btn-primary'
+                  onClick={() => onButtonClick(prompt)}
+                >
+                  {t('set default')}
+                </button>{' '}
               </div>
               <div
                 className='cursor-pointer'
