@@ -20,6 +20,8 @@ Respond using Markdown.`;
 export const modelOptions: ModelOptions[] = [
   'gpt-35-16k',
   'gpt-4',
+  'gpt-4t',
+  'gpt-4o',
   'gpt4-32k',
   // 'gpt-3.5-turbo-0301',
   // 'gpt-4-0314',
@@ -40,6 +42,8 @@ export const modelMaxToken = {
   'gpt-4-0613': 8192,
   'gpt-4-32k': 32768,
   'gpt4-32k': 32768,
+  'gpt-4t': 128000,
+  'gpt-4o': 128000,
   'gpt-4-32k-0314': 32768,
   'gpt-4-32k-0613': 32768,
 };
@@ -78,6 +82,14 @@ export const modelCost = {
     completion: { price: 0.06, unit: 1000 },
   },
   'gpt4-32k': {
+    prompt: { price: 0.06, unit: 1000 },
+    completion: { price: 0.12, unit: 1000 },
+  },
+  'gpt-4t': {
+    prompt: { price: 0.06, unit: 1000 },
+    completion: { price: 0.12, unit: 1000 },
+  },
+  'gpt-4o': {
     prompt: { price: 0.06, unit: 1000 },
     completion: { price: 0.12, unit: 1000 },
   },

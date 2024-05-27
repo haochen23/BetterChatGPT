@@ -27,7 +27,7 @@ export const getChatCompletion = async (
         ? 'gpt-35-turbo-16k'
         : config.model;
 
-    const apiVersion = '2023-03-15-preview';
+    const apiVersion = '2023-12-01-preview';
 
     const path = `openai/deployments/${model}/chat/completions?api-version=${apiVersion}`;
 
@@ -48,6 +48,7 @@ export const getChatCompletion = async (
       max_tokens: undefined,
     }),
   });
+  // console.log(response);
   if (!response.ok) throw new Error(await response.text());
 
   const data = await response.json();
@@ -79,7 +80,7 @@ export const getChatCompletionStream = async (
 
     console.log(endpoint);
 
-    const apiVersion = '2023-03-15-preview';
+    const apiVersion = '2023-12-01-preview';
 
     const path = `openai/deployments/${model}/chat/completions?api-version=${apiVersion}`;
 
@@ -90,6 +91,7 @@ export const getChatCompletionStream = async (
       endpoint += path;
     }
   }
+  console.log(endpoint);
 
   const response = await fetch(endpoint, {
     method: 'POST',
@@ -101,6 +103,7 @@ export const getChatCompletionStream = async (
       stream: true,
     }),
   });
+  console.log(response);
   if (response.status === 404 || response.status === 405) {
     const text = await response.text();
     if (text.includes('model_not_found')) {
